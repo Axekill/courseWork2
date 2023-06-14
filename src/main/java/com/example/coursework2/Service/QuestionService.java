@@ -9,7 +9,7 @@ import java.util.Collection;
 public interface QuestionService {
     Question addQuestion(Question question);
 
-    Question findQuestion(Question question);
+//    Question findQuestion(Question question);
 
     Question removeQuestion(Question question);
 
