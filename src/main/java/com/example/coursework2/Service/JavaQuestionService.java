@@ -17,16 +17,12 @@ public class JavaQuestionService implements QuestionService {
         return question;
     }
 
-//    @Override
-//    public Question findQuestion(Question question) {
-//        questions.contains(question);
-//        return question;
-//    }
-
     @Override
     public Question removeQuestion(Question question) {
-        questions.remove(question);
-        return question;
+        if ( questions.remove(question)) {
+            return question;
+        }
+        return null;
     }
 
     @Override

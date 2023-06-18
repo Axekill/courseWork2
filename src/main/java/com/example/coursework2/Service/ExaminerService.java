@@ -1,4 +1,6 @@
-package com.example.coursework2;
+package com.example.coursework2.Service;
+
+import com.example.coursework2.Question;
 
 import java.util.Collection;
 
