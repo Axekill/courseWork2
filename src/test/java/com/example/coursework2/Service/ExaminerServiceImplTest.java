@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,27 +14,29 @@ import static org.mockito.Mockito.when;
 
 class ExaminerServiceImplTest {
     @Mock
-    QuestionService questionServiceMock;
-    ExaminerService service;
+    JavaQuestionService questionServiceMock;
+    ExaminerServiceImpl service;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
         service = new ExaminerServiceImpl(questionServiceMock);
     }
-
-
     @Test
     void getQuestions() {
-        Set<Question> questions = new HashSet<>(Set.of(
+        Set<Question> questions = Set.of(
                 new Question("q", "a"),
                 new Question("q1", "a1"),
-                new Question("q2", "a2")));
+                new Question("q2", "a2")
+        );
         when(questionServiceMock.getAll()).thenReturn(questions);
-        var actual = service.getQuestions(2);
-        assertEquals(2, actual.size());
+        when(questionServiceMock.getRandomQuestion()).thenReturn(
+                new Question("q", "a"),
+                new Question("q1", "a1"),
+                new Question("q1", "a1")
+        );
+        assertEquals(2, service.getQuestions(2).size());
     }
-
     @Test
     void getQuestionException() {
         questionServiceMock.addQuestion(new Question("q", "a"));
